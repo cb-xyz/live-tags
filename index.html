@@ -6,17 +6,17 @@
     <title>livemap.nyc Summer 2026 Category Explorer</title>
     <meta
       name="description"
-      content="A curated Summer 2026 category explorer for livemap.nyc built from the taxonomy restructure and filtered to real Live XYZ maplists."
+      content="A curated Summer 2026 category explorer for livemap.nyc built from real Live XYZ maplists."
     >
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     >
     <link rel="stylesheet" href="./styles.css">
   </head>
-  <body>
+  <body data-layout="tabs">
     <div class="page-shell">
       <main class="explorer">
         <section class="toolbar">
@@ -32,17 +32,11 @@
 
           <section class="detail-panel">
             <div class="detail-header">
-              <div>
-                <p class="detail-kicker" id="detailKicker"></p>
-                <h2 id="detailTitle">Choose a category</h2>
-                <p class="detail-description" id="detailDescription">
-                </p>
-              </div>
-              <div class="detail-badges" id="detailBadges"></div>
+              <h2 id="detailTitle">Choose a category</h2>
             </div>
 
-            <div class="subcategory-tabs" id="subcategoryTabs" aria-label="Subcategories"></div>
-            <div class="tag-grid" id="tagGrid"></div>
+            <div class="subcategory-tabs subcategory-tabs-large" id="versionATabs" aria-label="Subcategories"></div>
+            <div class="tag-grid" id="versionATagGrid"></div>
           </section>
         </section>
       </main>

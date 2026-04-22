@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>livemap.nyc Summer 2026 Category Explorer</title>
+    <meta
+      name="description"
+      content="A curated Summer 2026 category explorer for livemap.nyc built from real Live XYZ maplists."
+    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <div class="page-shell">
+      <main class="explorer">
+        <section class="toolbar">
+          <label class="search-field" for="search">
+            <span>Explore</span>
+            <input id="search" type="search" placeholder="Try coffee, sports bar, museum..." autocomplete="off">
+          </label>
+          <div class="stats" id="stats" aria-live="polite"></div>
+        </section>
+
+        <section class="content-grid">
+          <nav class="category-rail" id="categoryRail" aria-label="Explorer categories"></nav>
+
+          <section class="detail-panel">
+            <div class="detail-header">
+              <h2 id="detailTitle">Choose a category</h2>
+            </div>
+
+            <section class="prototype-section">
+              <h3 class="prototype-title">Clickable Navigation</h3>
+              <div class="subcategory-tabs subcategory-tabs-large" id="tabNav" aria-label="Clickable navigation"></div>
+              <div class="tag-grid" id="tabGrid"></div>
+            </section>
+
+            <section class="prototype-section prototype-section-split">
+              <h3 class="prototype-title">All Maps Visible</h3>
+              <div class="split-columns" id="splitColumns"></div>
+            </section>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

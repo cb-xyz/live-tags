@@ -216,15 +216,14 @@ const state = {
   activeSubcategoryId: null
 };
 
+const layoutMode = document.body.dataset.layout || "tabs";
 const railEl = document.getElementById("categoryRail");
 const detailTitleEl = document.getElementById("detailTitle");
 const statsEl = document.getElementById("stats");
 const searchInput = document.getElementById("search");
-const versionAHeaderEl = document.getElementById("versionAHeader");
-const versionATabsEl = document.getElementById("versionATabs");
-const versionATagGridEl = document.getElementById("versionATagGrid");
-const versionBHeaderEl = document.getElementById("versionBHeader");
-const versionBColumnsEl = document.getElementById("versionBColumns");
+const tabsEl = document.getElementById("versionATabs");
+const tabsGridEl = document.getElementById("versionATagGrid");
+const splitColumnsEl = document.getElementById("versionBColumns");
 
 function normalize(value) {
   return String(value || "").toLowerCase().trim();
@@ -379,9 +378,8 @@ function renderTagCard(categoryId, tag) {
   `;
 }
 
-function renderVersionA(category, activeSubcategory) {
-  versionAHeaderEl.textContent = "Version A";
-  versionATabsEl.innerHTML = "";
+function renderTabsLayout(category, activeSubcategory) {
+  tabsEl.innerHTML = "";
   category.subcategories.forEach((subcategory) => {
     const button = document.createElement("button");
     button.type = "button";
@@ -391,14 +389,13 @@ function renderVersionA(category, activeSubcategory) {
       state.activeSubcategoryId = subcategory.id;
       render();
     });
-    versionATabsEl.appendChild(button);
+    tabsEl.appendChild(button);
   });
-  versionATagGridEl.innerHTML = activeSubcategory.tags.map((tag) => renderTagCard(category.id, tag)).join("");
+  tabsGridEl.innerHTML = activeSubcategory.tags.map((tag) => renderTagCard(category.id, tag)).join("");
 }
 
-function renderVersionB(category) {
-  versionBHeaderEl.textContent = "Version B";
-  versionBColumnsEl.innerHTML = category.subcategories
+function renderSplitLayout(category) {
+  splitColumnsEl.innerHTML = category.subcategories
     .map((subcategory) => {
       return `
         <section class="subcategory-column">
@@ -415,17 +412,22 @@ function renderVersionB(category) {
 function render() {
   const visibleCategories = getVisibleCategories();
   const activeCategory = getActiveCategory(visibleCategories);
+  const activeSubcategory = getActiveSubcategory(activeCategory);
 
   state.activeCategoryId = activeCategory.id;
-  state.activeSubcategoryId = getActiveSubcategory(activeCategory).id;
+  state.activeSubcategoryId = activeSubcategory.id;
 
   renderRail(visibleCategories);
   updateStats(visibleCategories);
-
-  const activeSubcategory = getActiveSubcategory(activeCategory);
   detailTitleEl.textContent = activeCategory.title;
-  renderVersionA(activeCategory, activeSubcategory);
-  renderVersionB(activeCategory);
+
+  if (layoutMode === "tabs" && tabsEl && tabsGridEl) {
+    renderTabsLayout(activeCategory, activeSubcategory);
+  }
+
+  if (layoutMode === "split" && splitColumnsEl) {
+    renderSplitLayout(activeCategory);
+  }
 }
 
 searchInput.addEventListener("input", (event) => {
